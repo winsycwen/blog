@@ -81,4 +81,4 @@ deploy:
   type: git
   repo: https://git.coding.net/winsycwen/blog.git
   branch: master
-  message: 'Added: init blog.'
+  message: 'Added: 测试新增一篇文章'
