@@ -79,6 +79,6 @@ theme: landscape
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://git.coding.net/winsycwen/blog.git
+  repo: git@git.coding.net:winsycwen/blog.git
   branch: master
-  message: 'Added: 测试新增一篇文章'
+  message: 'Updated: 发布文章“不同代码托管平台下，SSH密钥的生成及配置”'
