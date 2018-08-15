@@ -25,24 +25,23 @@ categories: 笔记
 
 1. 最终，打开C:\Users\{用户名}\.ssh目录，将发现目录下生成了**codingnet_rsa**和**codingnet_rsa.pub**两个文件。
 
+  **生成公私有密钥步骤：**
 
-**生成公私有密钥步骤：**
+    ```
+    winsycwen@DESKTOP-GRBPS3N MINGW64 ~
+    $ ssh-keygen -t rsa -C "{你的邮箱}"
+    Generating public/private rsa key pair.
+    Enter file in which to save the key (/c/Users/{用户名}/.ssh/id_rsa): /c/Users/{用户名}/.ssh/codingnet_rsa
+    Created directory '/c/Users/{用户名}/.ssh'.
+    Enter passphrase (empty for no passphrase):
+    Enter same passphrase again:
+    Your identification has been saved in /c/Users/{用户名}/.ssh/codingnet_rsa.
+    Your public key has been saved in /c/Users/{用户名}/.ssh/codingnet_rsa.pub.
+    The key fingerprint is:
+    SHA256:xxxxxxxxxxxxxxxxx {你的邮箱}
+    The key's randomart image is:xxxxxxxxxxxxxxxxxxxxxxxxxx
 
-```
-winsycwen@DESKTOP-GRBPS3N MINGW64 ~
-$ ssh-keygen -t rsa -C "{你的邮箱}"
-Generating public/private rsa key pair.
-Enter file in which to save the key (/c/Users/{用户名}/.ssh/id_rsa): /c/Users/{用户名}/.ssh/codingnet_rsa
-Created directory '/c/Users/{用户名}/.ssh'.
-Enter passphrase (empty for no passphrase):
-Enter same passphrase again:
-Your identification has been saved in /c/Users/{用户名}/.ssh/codingnet_rsa.
-Your public key has been saved in /c/Users/{用户名}/.ssh/codingnet_rsa.pub.
-The key fingerprint is:
-SHA256:xxxxxxxxxxxxxxxxx {你的邮箱}
-The key's randomart image is:xxxxxxxxxxxxxxxxxxxxxxxxxx
-
-```
+    ```
 
 二、开源项目托管在[github][2]上，那么：
 

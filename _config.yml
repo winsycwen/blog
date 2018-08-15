@@ -81,4 +81,4 @@ deploy:
   type: git
   repo: git@git.coding.net:winsycwen/blog.git
   branch: master
-  message: 'Updated: 发布文章“不同代码托管平台下，SSH密钥的生成及配置”'
+  message: 'Updated: 修改文章“不同代码托管平台下，SSH密钥的生成及配置”排版'
