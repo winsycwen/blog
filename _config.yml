@@ -74,3 +74,10 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: landscape
+
+# One-Command Deployment
+deploy:
+  type: git
+  repo: https://github.com/winsycwen/blog.git
+  branch: master
+  message: 重新构建博客
