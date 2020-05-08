@@ -77,12 +77,12 @@ theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
-deploy:
-- type: git
-  repo: https://git.coding.net/winsycwen/blog.git
-  branch: master
-  message: 'Added: 新增文章-“js基础知识”'
-- type: git
-  repo: root@39.108.0.209:/www/myblog/blog.git
-  branch: master
-  message: 'Added: 新增文章-“js基础知识”'
+# deploy:
+# - type: git
+#   repo: https://git.coding.net/winsycwen/blog.git
+#   branch: master
+#   message: 'Added: 新增文章-“js基础知识”'
+# - type: git
+#   repo: root@39.108.0.209:/www/myblog/blog.git
+#   branch: master
+#   message: 'Added: 新增文章-“js基础知识”'
