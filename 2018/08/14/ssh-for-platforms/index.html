@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>不同代码托管平台下，SSH密钥的生成及配置 | winsycwen的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="背景对于我而言，闭源项目都在coding上托管，而开源项目都托管在github上。二者都是基于Git的开源分布式版本控制系统，在本地可以通过SSH协议进行远程登录验证和数据传输，而使用该协议需要在托管平台上配置公钥，客户端（电脑）存放公钥对应的密钥。 默认情况下，在同一客户端（电脑）生成密钥时，密钥所存放的文件位置和文件名称是相同的（默认为C:\Users\spin.ssh\id_rsa和C:\U">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="不同代码托管平台下，SSH密钥的生成及配置">
+<meta property="og:url" content="https://winsycwen.github.io/blog/2018/08/14/ssh-for-platforms/index.html">
+<meta property="og:site_name" content="winsycwen的个人博客">
+<meta property="og:description" content="背景对于我而言，闭源项目都在coding上托管，而开源项目都托管在github上。二者都是基于Git的开源分布式版本控制系统，在本地可以通过SSH协议进行远程登录验证和数据传输，而使用该协议需要在托管平台上配置公钥，客户端（电脑）存放公钥对应的密钥。 默认情况下，在同一客户端（电脑）生成密钥时，密钥所存放的文件位置和文件名称是相同的（默认为C:\Users\spin.ssh\id_rsa和C:\U">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-05-08T11:24:48.721Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="不同代码托管平台下，SSH密钥的生成及配置">
+<meta name="twitter:description" content="背景对于我而言，闭源项目都在coding上托管，而开源项目都托管在github上。二者都是基于Git的开源分布式版本控制系统，在本地可以通过SSH协议进行远程登录验证和数据传输，而使用该协议需要在托管平台上配置公钥，客户端（电脑）存放公钥对应的密钥。 默认情况下，在同一客户端（电脑）生成密钥时，密钥所存放的文件位置和文件名称是相同的（默认为C:\Users\spin.ssh\id_rsa和C:\U">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="winsycwen的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">winsycwen的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">winsycwen&#39;s personal website</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://winsycwen.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ssh-for-platforms" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2018/08/14/ssh-for-platforms/" class="article-date">
+  <time datetime="2018-08-14T07:43:31.000Z" itemprop="datePublished">2018-08-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/笔记/">笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      不同代码托管平台下，SSH密钥的生成及配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>对于我而言，闭源项目都在<a href="https://coding.net/" title="coding" target="_blank" rel="noopener">coding</a>上托管，而开源项目都托管在<a href="http://github.com/" title="github" target="_blank" rel="noopener">github</a>上。二者都是基于Git的开源分布式版本控制系统，在本地可以通过SSH协议进行远程登录验证和数据传输，而使用该协议需要在托管平台上配置公钥，客户端（电脑）存放公钥对应的密钥。</p>
+<p>默认情况下，在同一客户端（电脑）生成密钥时，密钥所存放的文件位置和文件名称是相同的（默认为C:\Users\spin.ssh\id_rsa和C:\Users\spin.ssh\id_rsa.pub），那么就会出现新生成的密钥覆盖原来的密钥。所以，我们需要将区分开不同代码托管平台的密钥文件。</p>
+<h2 id="生成公私密钥"><a href="#生成公私密钥" class="headerlink" title="生成公私密钥"></a>生成公私密钥</h2><p>一、闭源项目托管在<a href="https://coding.net/" title="coding" target="_blank" rel="noopener">coding</a>上，那么：</p>
+<ol>
+<li><p>任意打开一个目录，打开git命令行；</p>
+</li>
+<li><p>执行<strong>ssh-keygen -t rsa -C “{你的邮箱}”</strong>；</p>
+</li>
+<li><p>接下来会询问你存放密钥的路径和文件名称<strong>Enter file in which to save the key (/c/Users/{用户名}/.ssh/id_rsa)</strong>，假设存储为/c/Users/{用户名}/.ssh/codingnet_rsa，如果不填默认文件名就是id_rsa;</p>
+</li>
+<li><p>接下来还会询问你是否需要登录密码，可以设置也可以不设置；</p>
+</li>
+<li><p>最终，打开C:\Users{用户名}.ssh目录，将发现目录下生成了<strong>codingnet_rsa</strong>和<strong>codingnet_rsa.pub</strong>两个文件。</p>
+<p><strong>生成公私有密钥步骤：</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">winsycwen@DESKTOP-GRBPS3N MINGW64 ~</span><br><span class="line">$ ssh-keygen -t rsa -C &quot;&#123;你的邮箱&#125;&quot;</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/c/Users/&#123;用户名&#125;/.ssh/id_rsa): /c/Users/&#123;用户名&#125;/.ssh/codingnet_rsa</span><br><span class="line">Created directory &apos;/c/Users/&#123;用户名&#125;/.ssh&apos;.</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in /c/Users/&#123;用户名&#125;/.ssh/codingnet_rsa.</span><br><span class="line">Your public key has been saved in /c/Users/&#123;用户名&#125;/.ssh/codingnet_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:xxxxxxxxxxxxxxxxx &#123;你的邮箱&#125;</span><br><span class="line">The key&apos;s randomart image is:xxxxxxxxxxxxxxxxxxxxxxxxxx</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>二、开源项目托管在<a href="http://github.com/" title="github" target="_blank" rel="noopener">github</a>上，那么：</p>
+<ol>
+<li><p>步骤同上，只是在第2步将密钥文件命名为github_rsa。</p>
+</li>
+<li><p>最终，打开<strong>C:\Users{用户名}.ssh</strong>目录，将发现目录下生成了<strong>github_rsa</strong>和<strong>github_rsa.pub</strong>两个文件。</p>
+</li>
+</ol>
+<h2 id="分别配置公用密钥"><a href="#分别配置公用密钥" class="headerlink" title="分别配置公用密钥"></a>分别配置公用密钥</h2><p>一、对于闭源项目：</p>
+<ol>
+<li><p>打开<strong>C:\Users{用户名}.ssh\codingnet_rsa.pub</strong>并复制里面的内容；</p>
+</li>
+<li><p>打开<a href="https://coding.net/" title="coding" target="_blank" rel="noopener">coding</a>并登录，找到配置SSH公钥的页面并添加SSH公钥；</p>
+</li>
+</ol>
+<p>二、对于开源项目：</p>
+<ol>
+<li><p>打开<strong>C:\Users{用户名}.ssh\github_rsa.pub</strong>并复制里面的内容；</p>
+</li>
+<li><p>打开<a href="http://github.com/" title="github" target="_blank" rel="noopener">github</a>并登录，找到配置SSH公钥的页面并添加SSH公钥；</p>
+</li>
+</ol>
+<h2 id="检测有效性"><a href="#检测有效性" class="headerlink" title="检测有效性"></a>检测有效性</h2><p>由于，首次建立连接需要获得主机的信任，因此需要执行下列操作：</p>
+<p>一、对于闭源项目：</p>
+<ol>
+<li><p>打开git命令行，执行<strong>ssh-agent bash</strong>，然后执行<strong>ssh-add ~/.ssh/codingnet_rsa</strong>；</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">winsycwen@DESKTOP-GRBPS3N MINGW64 /d/study/project</span><br><span class="line">$ ssh-add ~/.ssh/codingnet_rsa</span><br><span class="line">Identity added: /c/Users/winsycwen/.ssh/codingnet_rsa (/c/Users/winsycwen/.ssh/codingnet_rsa)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行<strong>ssh -T <a href="mailto:git@git.coding.net" target="_blank" rel="noopener">git@git.coding.net</a></strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">winsycwen@DESKTOP-GRBPS3N MINGW64 /d/study/project</span><br><span class="line">$ ssh -T git@git.coding.net</span><br><span class="line">Coding 提示: Hello winsycwen, You&apos;ve connected to Coding.net via SSH. This is a personal key.</span><br><span class="line">winsycwen，你好，你已经通过 SSH 协议认证 Coding.net 服务，这是一个个人公钥</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后，我们可以测试一下，例如执行<strong>git clone <a href="mailto:git@git.coding.net" target="_blank" rel="noopener">git@git.coding.net</a>:{用户名}/{仓库名}.git</strong></p>
+</li>
+</ol>
+<p>二、对于开源项目：</p>
+<ol>
+<li><p>打开git命令行，执行<strong>ssh-agent bash</strong>，然后执行<strong>ssh-add ~/.ssh/github_rsa</strong>；</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">winsycwen@DESKTOP-GRBPS3N MINGW64 /d/study/project</span><br><span class="line">$ ssh-add ~/.ssh/github_rsa</span><br><span class="line">Identity added: /c/Users/winsycwen/.ssh/github_rsa (/c/Users/winsycwen/.ssh/github_rsa)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行<strong>ssh -T <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a></strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">winsycwen@DESKTOP-GRBPS3N MINGW64 /d/study/project</span><br><span class="line">$ ssh -T git@github.com</span><br><span class="line">Hi winsycwen! You&apos;ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后，我们可以测试一下，例如执行<strong>git clone <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:{用户名}/{仓库名}.git</strong></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://winsycwen.github.io/blog/2018/08/14/ssh-for-platforms/" data-id="ck9yztbfq00050rqz42mpp6p0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Git/">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2018/11/08/optional-semicolon/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          javascript可选的分号
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/笔记/">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/UNIX/">UNIX</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/Git/" style="font-size: 10px;">Git</a> <a href="/blog/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/blog/tags/UNIX/" style="font-size: 10px;">UNIX</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/08/">August 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2020/05/08/learning-of-unix/">学习UNIX</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/11/08/js-basic-knowledge/">js基础知识</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/11/08/optional-semicolon/">javascript可选的分号</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2018/08/14/ssh-for-platforms/">不同代码托管平台下，SSH密钥的生成及配置</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+  <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
