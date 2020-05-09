@@ -79,6 +79,8 @@ theme: landscape
 deploy:
   type: git
   repo: https://github.com/winsycwen/blog.git
+  name: winsycwen
+  email: winsycwen@gmail.com
   branch: master
   message: 重新构建博客
   token: $DEPLOY_BLOG
