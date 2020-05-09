@@ -345,6 +345,9 @@
 <li><p>最终，打开<strong>C:\Users{用户名}.ssh</strong>目录，将发现目录下生成了<strong>github_rsa</strong>和<strong>github_rsa.pub</strong>两个文件。</p>
 </li>
 </ol>
+<p>三、配置config文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">  UseKeychain yes</span><br><span class="line">IdentityFile /Users/apple/.ssh/github_rsa</span><br><span class="line"></span><br><span class="line">Host git.coding.net</span><br><span class="line">  UseKeychain yes</span><br><span class="line">IdentityFile /Users/apple/.ssh/codingnet_rsa</span><br></pre></td></tr></table></figure>
+
 <h2 id="分别配置公用密钥"><a href="#分别配置公用密钥" class="headerlink" title="分别配置公用密钥"></a>分别配置公用密钥</h2><p>一、对于闭源项目：</p>
 <ol>
 <li><p>打开<strong>C:\Users{用户名}.ssh\codingnet_rsa.pub</strong>并复制里面的内容；</p>

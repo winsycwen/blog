@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="winsycwen的个人博客">
 <meta property="og:description" content="背景对于我而言，闭源项目都在coding上托管，而开源项目都托管在github上。二者都是基于Git的开源分布式版本控制系统，在本地可以通过SSH协议进行远程登录验证和数据传输，而使用该协议需要在托管平台上配置公钥，客户端（电脑）存放公钥对应的密钥。 默认情况下，在同一客户端（电脑）生成密钥时，密钥所存放的文件位置和文件名称是相同的（默认为C:\Users\spin.ssh\id_rsa和C:\U">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-05-08T11:24:48.721Z">
+<meta property="og:updated_time" content="2020-05-09T02:16:40.880Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="不同代码托管平台下，SSH密钥的生成及配置">
 <meta name="twitter:description" content="背景对于我而言，闭源项目都在coding上托管，而开源项目都托管在github上。二者都是基于Git的开源分布式版本控制系统，在本地可以通过SSH协议进行远程登录验证和数据传输，而使用该协议需要在托管平台上配置公钥，客户端（电脑）存放公钥对应的密钥。 默认情况下，在同一客户端（电脑）生成密钥时，密钥所存放的文件位置和文件名称是相同的（默认为C:\Users\spin.ssh\id_rsa和C:\U">
@@ -120,6 +120,9 @@
 <li><p>最终，打开<strong>C:\Users{用户名}.ssh</strong>目录，将发现目录下生成了<strong>github_rsa</strong>和<strong>github_rsa.pub</strong>两个文件。</p>
 </li>
 </ol>
+<p>三、配置config文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">  UseKeychain yes</span><br><span class="line">IdentityFile /Users/apple/.ssh/github_rsa</span><br><span class="line"></span><br><span class="line">Host git.coding.net</span><br><span class="line">  UseKeychain yes</span><br><span class="line">IdentityFile /Users/apple/.ssh/codingnet_rsa</span><br></pre></td></tr></table></figure>
+
 <h2 id="分别配置公用密钥"><a href="#分别配置公用密钥" class="headerlink" title="分别配置公用密钥"></a>分别配置公用密钥</h2><p>一、对于闭源项目：</p>
 <ol>
 <li><p>打开<strong>C:\Users{用户名}.ssh\codingnet_rsa.pub</strong>并复制里面的内容；</p>
