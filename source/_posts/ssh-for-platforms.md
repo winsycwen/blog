@@ -49,6 +49,16 @@ categories: 笔记
 
 1. 最终，打开**C:\Users\{用户名}\.ssh**目录，将发现目录下生成了**github_rsa**和**github_rsa.pub**两个文件。
 
+三、配置config文件
+```
+Host github.com
+  UseKeychain yes
+IdentityFile /Users/apple/.ssh/github_rsa
+
+Host git.coding.net
+  UseKeychain yes
+IdentityFile /Users/apple/.ssh/codingnet_rsa
+```
 
 ## 分别配置公用密钥
 
