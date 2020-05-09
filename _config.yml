@@ -81,4 +81,4 @@ deploy:
   repo: https://github.com/winsycwen/blog.git
   branch: master
   message: 重新构建博客
-  token: $GITHUB_TOKEN
+  token: $DEPLOY_BLOG
