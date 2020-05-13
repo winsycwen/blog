@@ -18,7 +18,7 @@ JSX是Javascript语法的延伸。
 ### 为什么使用JSX呢？
 React将标记和逻辑放在松散耦合单元（组件），实现[关注点分离](https://en.wikipedia.org/wiki/Separation_of_concerns)，而不是将标记和逻辑人为分离到不同文件中。
 
-> https://www.youtube.com/watch?reload=9&v=x7cQ3mrcKaY
+> 相关内容：https://www.youtube.com/watch?reload=9&v=x7cQ3mrcKaY
 
 ### 注意事项
 - 使用括号()包裹内容为了避免[自动插入分号](https://stackoverflow.com/questions/2846283/what-are-the-rules-for-javascripts-automatic-semicolon-insertion-asi)问题。
