@@ -1,9 +1,10 @@
 ---
 title: 学习React
-date: 2020-05-13 14:06:43
 tags: React
 categories: 笔记
+date: 2020-05-13 14:06:43
 ---
+
 
 ## 了解React
 
